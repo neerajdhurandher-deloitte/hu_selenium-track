@@ -4,24 +4,18 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 
 import static java.lang.Thread.sleep;
 
-public class headlessMode {
-    public static void main(String[] args) throws InterruptedException {
+public class Main {
 
-
-        System.setProperty("webdriver.chrome.driver","C:\\Users\\ndhurandher\\Downloads\\chromedriver.exe");
-
-        WebDriver driver;
-        ChromeOptions options=new ChromeOptions();
-        options.addArguments("--headless");
-        driver=new ChromeDriver(options);
-
+    public void runProgram(WebDriver driver) throws InterruptedException {
 
         driver.manage().window().maximize();
         driver.get("https://phptravels.com/demo");
+
+        System.out.println("Main Page open");
+
         String parentWindow = driver.getWindowHandle();
 
         String homePageTitle = driver.getTitle();
@@ -36,6 +30,7 @@ public class headlessMode {
 
         WebElement loginBtn = driver.findElement(By.xpath("//a[text() = 'Login']"));
         loginBtn.click();
+        System.out.println("Open Login Page");
         sleep(5000);
         String loginPageTitle = driver.getTitle();
 
@@ -48,6 +43,8 @@ public class headlessMode {
 
         driver.switchTo().window(parentWindow);
 
+        System.out.println("Back to Main Page");
+
         String webPageUrl = driver.getCurrentUrl();
 
         System.out.println("Current Page Url : -"+webPageUrl);
@@ -58,21 +55,37 @@ public class headlessMode {
 
         priceBtn.click();
 
+        System.out.println("Open Pricing Page");
+
         sleep(3000);
 
         driver.navigate().back();
+
+        System.out.println("Again Back to Main Page");
 
         sleep(3000);
 
         driver.navigate().refresh();
 
+        System.out.println("Refresh Page ");
+
         sleep(3000);
 
         driver.close();
 
+        System.out.println("Close tab");
+
         System.out.println("End of Program");
 
 
+    }
+
+
+    public void main(String[] args) throws InterruptedException {
+        System.setProperty("webdriver.chrome.driver","C:\\Users\\ndhurandher\\Downloads\\chromedriver.exe");
+        WebDriver driver = new ChromeDriver();
+
+        runProgram(driver);
 
     }
 }
