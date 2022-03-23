@@ -15,8 +15,8 @@ public class HeadlessMode {
         driver=new ChromeDriver(options);
 
 
-        Main mainProgram = new Main();
-        mainProgram.runProgram(driver);
+        Function function = new Function(driver);
+        function.runProgram();
 
     }
 }
